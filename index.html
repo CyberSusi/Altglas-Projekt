@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AltglasRadar</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <!-- Eigenes CSS -->
+  <link rel="stylesheet" href="style.css"/>
+
+  <style>
+    #map {
+      height: 100%;
+      width: 100%;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-shape">
+    <header class="header">
+      <h1>Altglas Radar</h1>
+      <nav>
+        <a href="#">Start</a>
+        <a href="#">Über uns</a>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <aside class="sidebar">
+        <input type="text" placeholder="Straße eingeben" class="search-input"/>
+        <label><input type="checkbox" /> Nur leere Container anzeigen</label>
+        <p>Radius: <strong>5 km</strong></p>
+
+        <div class="container-list">
+          <div class="container-entry green">
+            <p><strong>Musterstraße 106</strong><br>18 % voll</p>
+            <small>Letztes Update: vor 6 Stunden</small>
+          </div>
+          <div class="container-entry yellow">
+            <p><strong>Beispielweg 12</strong><br>58 % voll</p>
+            <small>Letztes Update: vor 9 Stunden</small>
+          </div>
+          <div class="container-entry red">
+            <p><strong>Teststraße 8</strong><br>92 % voll</p>
+            <small>Letztes Update: vor 2 Stunden</small>
+          </div>
+        </div>
+      </aside>
+
+      <section class="map">
+        <div id="map"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Leaflet Map Script -->
+  <script>
+    const map = L.map('map').setView([47.995, 7.835], 13);
+;
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap-Mitwirkende'
+    }).addTo(map);
+
+    // Container-Marker
+    L.marker([47.997778, 7.8425]).addTo(map)
+        .bindPopup("<b>Altglascontainer – Bertoldstraße</b><br>35 % voll");
+
+    L.marker([47.9827, 7.8236]).addTo(map)
+        .bindPopup("<b>Altglascontainer – Vaubanallee</b><br>82 % voll");
+
+    L.marker([48.0021, 7.8378]).addTo(map)
+        .bindPopup("<b>Altglascontainer – Zähringer Straße</b><br>15 % voll");
+
+  </script>
+</body>
+</html>
